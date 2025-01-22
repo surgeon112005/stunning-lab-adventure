@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Development AI</title>
+</head>
+<body>
+    <h1>Skill Development AI</h1>
+    <p>Pre-Production Phase</p>
+    <p>We have no access to personal information about you unless you explicitly provide it.</p>
+    <input type="text" id="searchBox" placeholder="Enter your query">
+    <button onclick="search()">Search</button>
+    <p id="result"></p>
+
+    <script>
+        async function search() {
+            const prompt = document.getElementById('searchBox').value;
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            });
+            const data = await response.json();
+            document.getElementById('result').innerText = data.response;
+        }
+    </script>
+</body>
+</html>
