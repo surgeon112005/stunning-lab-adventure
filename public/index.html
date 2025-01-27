@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Development AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom right, #ffffff, #dcd0ff);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        h1 span {
+            color: #6a5acd;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            border: none;
+            background-color: #6a5acd;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .suggestions {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .suggestion {
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Get help with <span>anything</span> - Skill Development AI</h1>
+    <p>Ask questions. Find answers.<br>Get back to upskilling.</p>
+    <p>This AI is in pre-production phase.<br>
+        Keep the word limit of exactly 600 to avoid breakdown.</p>
+    
+    <div class="search-box">
+        <input type="text" id="searchBox" placeholder="Enter your query">
+        <button onclick="search()">Search</button>
+    </div>
+    
+    <p id="result"></p>
+    
+    <div class="suggestions">
+        <div class="suggestion">📤 How do I prepare for interview?</div>
+        <div class="suggestion">🖨️ Roadmap for Web Development</div>
+        <div class="suggestion">👑 Suggest industry graded project for resume</div>
+        <div class="suggestion">↗️ Important interview questions</div>
+        <div class="suggestion">✂️ Mistakes I should avoid in HR round</div>
+        <!-- <div class="suggestion">💲 Why was I charged?</div> -->
+    </div>
+    
+    <script>
+        async function search() {
+            const prompt = document.getElementById('searchBox').value;
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            });
+            const data = await response.json();
+            document.getElementById('result').innerText = data.response;
+        }
+    </script>
+<!-- TODO: added a connect feature -->
+<button onclick="window.location.href='mailto:contact.priyanshupandey@gmail.com'" style="margin-top: 20px; padding: 10px 15px; border: none; background-color: #e29bfea9; color: white; border-radius: 5px; cursor: pointer; font-size: 16px;">Connect with the Founder</button>
+
+</body>
+</html>
